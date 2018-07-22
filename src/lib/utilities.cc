@@ -160,6 +160,7 @@ int handleError(bool success, int errorCode) {
 		if (errorCode < 1000) {
 			fprintf(stderr, "Exit with code %d due to http error: %d %s\n", c, errorCode, m);
 		} else {
+			c = EXIT_SUCCESS;
 			QNetworkReply::NetworkError error = (QNetworkReply::NetworkError)(errorCode - 1000);
 			QString errorValue;
 			QMetaObject meta = QNetworkReply::staticMetaObject;
