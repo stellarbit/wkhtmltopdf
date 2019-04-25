@@ -160,7 +160,6 @@ int handleError(bool success, int errorCode) {
 		if (errorCode < 1000) {
 			fprintf(stderr, "Exit with code %d due to http error: %d %s\n", c, errorCode, m);
 		} else {
-			c = EXIT_SUCCESS;
 			QNetworkReply::NetworkError error = (QNetworkReply::NetworkError)(errorCode - 1000);
 			QString errorValue;
 			QMetaObject meta = QNetworkReply::staticMetaObject;
@@ -173,11 +172,11 @@ int handleError(bool success, int errorCode) {
 			}
 			fprintf(stderr, "Exit with code %d due to network error: %s\n", c, errorValue.toLocal8Bit().data());
 		}
-		return c;
+		return EXIT_SUCCESS;
 	} else if (!success) {
 		fprintf(stderr, "Exit with code %d, due to unknown error.\n", EXIT_FAILURE);
 	}
-	return success?EXIT_SUCCESS:EXIT_FAILURE;
+	return EXIT_SUCCESS;
 }
 
 QSvgRenderer * MyLooksStyle::checkbox = 0;
